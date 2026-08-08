@@ -15,41 +15,29 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: إعداد مشروع Capacitor
-        run: |
-          npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
+      - name: إعداد Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
 
-      - name: تجهيز ملفات الموقع
-        run: |
-          mkdir -p www
-          cp index.html www/
-          cp style.css www/
-          cp app.js www/
-          cp manifest.json www/ 2>/dev/null || true
-          cp -r icons www/ 2>/dev/null || true
+      - name: تثبيت الحزم
+        run: npm install
 
-      - name: إنشاء إعدادات Capacitor
-        run: |
-          npx cap init PGX com.pgx.app --web-dir www
+      - name: بناء تطبيق الويب
+        run: npm run build
 
-      - name: إضافة Android
-        run: |
-          npx cap add android
+      - name: مزامنة Capacitor مع Android
+        run: npx cap sync android
 
-      - name: نسخ ملفات التطبيق
-        run: |
-          npx cap copy android
-
-      - name: إعداد Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - name: إعطاء صلاحية Gradle
+        run: chmod +x android/gradlew
 
       - name: بناء APK
-        run: |
-          cd android
-          chmod +x gradlew
-          ./gradlew assembleDebug
+        working-directory: android
+        run: ./gradlew assembleDebug
 
       - name: رفع APK
         uses: actions/upload-artifact@v4
