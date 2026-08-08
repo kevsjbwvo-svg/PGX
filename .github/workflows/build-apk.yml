@@ -1,1 +1,49 @@
+name: Build PGX APK
 
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: تحميل المشروع
+        uses: actions/checkout@v4
+
+      - name: إعداد Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: إعداد مشروع Capacitor
+        run: |
+          npm init -y
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+
+      - name: إنشاء إعدادات Capacitor
+        run: |
+          npx cap init PGX com.pgx.app --web-dir .
+
+      - name: إضافة Android
+        run: |
+          npx cap add android
+
+      - name: نسخ ملفات التطبيق
+        run: |
+          npx cap copy android
+
+      - name: إعداد Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: بناء APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: رفع APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: PGX-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
