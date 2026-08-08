@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGX</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<header>
+    <h1>🎮 PGX</h1>
+    <p>Play Gaming eXperience</p>
+</header>
+
+<section class="top-info">
+
+    <div class="card">
+        <h3>🎮 البلايستيشن</h3>
+        <span id="psCount">0 / 3</span>
+    </div>
+
+    <div class="card">
+        <h3>🖥️ الكمبيوتر</h3>
+        <span id="pcCount">0 / 6</span>
+    </div>
+
+    <div class="card">
+        <h3>💰 دخل اليوم</h3>
+        <span id="todayMoney">0 جنيه</span>
+    </div>
+
+</section>
+
+<h2 class="title">الأجهزة</h2>
+<button onclick="openDrinks()">
+🥤 المشروبات
+</button>
+<button onclick="showHistory()">
+📋 سجل الجلسات
+</button> 
+<button onclick="adminPanel()">
+🔐 لوحة الإدارة
+</button>
+<button onclick="quickOverview()">
+📊 نظرة سريعة
+</button>
+<button onclick="backupData()">
+💾 نسخ احتياطي
+</button>
+<button onclick="restoreData()">
+♻️ استرجاع نسخة
+</button>
+<button onclick="openShift()">
+🟢 فتح الشيفت
+</button>
+
+<button onclick="closeShift()">
+🔴 قفل الشيفت
+</button>
+
+<button onclick="showShiftReports()">
+📊 تقارير الشيفتات
+</button>
+
+<p id="shiftStatus">
+🔴 لا يوجد شيفت مفتوح
+</p>
+<button onclick="showRunningDevices()">
+📺 الأجهزة المشغولة
+</button>
+<button onclick="changePrice()">
+💵 تغيير سعر جهاز
+</button>
+<button onclick="resetTodayMoney()">
+🗑️ تصفير دخل اليوم
+</button>
+<div id="devices" class="devices-grid"></div>
+<div id="popup" class="popup">
+
+    <div class="popup-box">
+
+        <h2>اختر مدة اللعب</h2>
+
+        <button onclick="chooseTime(0.5)">
+            30 دقيقة
+        </button>
+
+        <button onclick="chooseTime(1)">
+            ساعة
+        </button>
+
+        <button onclick="chooseTime(2)">
+            ساعتان
+        </button>
+
+        <button onclick="chooseTime(3)">
+            3 ساعات
+        </button>
+
+        <button onclick="chooseTime(4)">
+            4 ساعات
+        </button>
+
+<button onclick="customTime()">
+    ⏱️ وقت مخصص
+</button>
+ 
+        <button class="open-btn" onclick="chooseOpen()">
+            OPEN
+        </button>
+
+        <button class="cancel-btn" onclick="closePopup()">
+            إلغاء
+        </button>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
