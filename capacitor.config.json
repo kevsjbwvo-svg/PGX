@@ -1,1 +1,5 @@
-
+{
+  "appId": "com.pgx.app",
+  "appName": "PGX",
+  "webDir": "www"
+}
