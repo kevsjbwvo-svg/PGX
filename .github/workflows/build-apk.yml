@@ -25,10 +25,18 @@ jobs:
       - name: تثبيت الحزم
         run: npm install
 
-      - name: بناء تطبيق الويب
-        run: npm run build
+      - name: تجهيز ملفات الويب
+        run: |
+          mkdir -p www
+          cp index.html www/
+          cp app.js www/
+          cp style.css www/
+          cp -r assets www/
 
-      - name: مزامنة Capacitor مع Android
+      - name: إضافة Android
+        run: npx cap add android
+
+      - name: مزامنة Capacitor
         run: npx cap sync android
 
       - name: إعطاء صلاحية Gradle
